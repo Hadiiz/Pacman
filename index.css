@@ -4,8 +4,8 @@ body {
 
 #myCanvas {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 37%;
+  top: 30%;
   margin-left: -10%; /* This is half the width */
   margin-top: -10%; /* This is half the height */
 }
