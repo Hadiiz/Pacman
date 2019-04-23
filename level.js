@@ -9,37 +9,36 @@ let arr = [];
 var bgImg = new Image();
 bgImg.src = "./img/maze.png";
 bgImg.onload = () => {
-  // ctx.drawImage(bgImg, 0, 0);
   generateGraph(arr, rows, cols);
+
   main();
-  // drawGraph(ctx, arr, rows, cols);
 };
 
-///////////////////////////////////////////////////////
-var keysDown = {};
+/////////////////////3//////////////////////////////////
+let keyPressed;
 
 addEventListener(
   "keydown",
   function(e) {
-    keysDown[e.keyCode] = true;
+    keyPressed = e.keyCode;
   },
   false
 );
 
-addEventListener(
+/*addEventListener(
   "keyup",
   function(e) {
     delete keysDown[e.keyCode];
   },
   false
-);
+);*/
 ///////////////////////////////////////////////////////
 
-let pacman = new Pacman(4, 4, ctx);
+let pacman = new Pacman(360, 440, ctx, arr);
 
 let main = () => {
   ctx.drawImage(bgImg, 0, 0);
   pacman.draw(ctx);
-  pacman.update(keysDown);
+  pacman.update(keyPressed);
   requestAnimationFrame(main);
 };

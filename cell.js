@@ -38,7 +38,7 @@ export function generateGraph(arr, rows, cols) {
 export function drawGraph(ctx, arr, rows, cols) {
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      if (arr[i][j].wall == true) {
+      /*if (arr[i][j].wall == true) {
         ctx.fillStyle = "black";
         ctx.fillRect(j * 40, i * 40, 40, 40);
         ctx.stroke();
@@ -46,7 +46,10 @@ export function drawGraph(ctx, arr, rows, cols) {
         ctx.fillStyle = "blue";
         ctx.fillRect(j * 40, i * 40, 40, 40);
         ctx.stroke();
-      }
+      }*/
+      ctx.strokeStyle = "red";
+      ctx.rect(j * 40, i * 40, 40, 40);
+      ctx.stroke();
     }
   }
 }
