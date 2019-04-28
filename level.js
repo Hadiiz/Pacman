@@ -1,20 +1,34 @@
-import Cell, { drawGraph, generateGraph } from "./cell.js";
+import Cell, {
+  drawGraph,
+  generateGraph,
+  data,
+  generateCoins,
+  drawCoins
+} from "./cell.js";
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
 let rows = 15;
 let cols = 19;
 let arr = [];
+let sprite = [];
+let deleted = [];
+let bgLoaded = false;
+
+let pacman = new Pacman(360, 440, ctx, arr);
 
 var bgImg = new Image();
 bgImg.src = "./img/maze.png";
 bgImg.onload = () => {
-  generateGraph(arr, rows, cols);
-
+  bgLoaded = true;
+  generateGraph(arr, rows, cols, ctx);
+  generateCoins(data, arr);
+  console.log(arr);
   main();
 };
 
-/////////////////////3//////////////////////////////////
+////////////////////////////////////////////////////////
+
 let keyPressed;
 
 addEventListener(
@@ -25,20 +39,20 @@ addEventListener(
   false
 );
 
-/*addEventListener(
-  "keyup",
-  function(e) {
-    delete keysDown[e.keyCode];
-  },
-  false
-);*/
-///////////////////////////////////////////////////////
-
-let pacman = new Pacman(360, 440, ctx, arr);
+////////////////////////////////////////////////////////
 
 let main = () => {
   ctx.drawImage(bgImg, 0, 0);
-  pacman.draw(ctx);
-  pacman.update(keyPressed);
+  if (bgLoaded) {
+    drawCoins(arr, ctx);
+    pacman.draw();
+    pacman.update(keyPressed);
+    if (pacman.x % 40 == 0 && pacman.y % 40 == 0) {
+      if (arr[pacman.y / 40][pacman.x / 40].coin == true)
+        arr[pacman.y / 40][pacman.x / 40].coin = false;
+    }
+  }
+  // pacman.draw(ctx);
+  // pacman.update(keyPressed);
   requestAnimationFrame(main);
 };
